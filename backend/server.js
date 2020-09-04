@@ -6,13 +6,13 @@ import Videos from "./dbModel.js";
 
 //app config
 const app = express();
-const port = 9000;
+const PORT = process.env.PORT || 9000;
 
 //middlewares
 app.use(express.json());
 app.use((request, response, next) => {
-  response.setHeaders("Access-Control-Allow-Origin", "*"),
-    response.setHeaders("Access-Control-Allow-Headers", "*"),
+  response.setHeader("Access-Control-Allow-Origin", "*"),
+    response.setHeader("Access-Control-Allow-Headers", "*"),
     next();
 });
 
@@ -27,7 +27,9 @@ mongoose.connect(connection_url, {
 });
 
 //API endpoints
-app.get("/", (request, response) => response.status(200).send("hello Sonny"));
+app.get("/", (request, response) =>
+  response.status(200).send("Zdarova Petushki")
+);
 
 app.get("/v1/posts", (request, response) => response.status(200).send(Data));
 
@@ -54,4 +56,4 @@ app.post("/v2/posts", (request, response) => {
 });
 
 //listen
-app.listen(port, () => console.log(`listening on localhost:${port}`));
+app.listen(PORT, () => console.log(`listening on localhost:${PORT}`));
